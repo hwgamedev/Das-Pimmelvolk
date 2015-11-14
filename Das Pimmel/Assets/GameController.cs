@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
 	public GameObject ceiling;
 	public GameObject wall;
 
-	public GameObject[] walls;
+	public GameObject[,] walls;
 
 	public int scale = 3;
 
@@ -15,30 +15,37 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Instantiate (ground);
 		Instantiate (ceiling);
-		walls = new GameObject[100];
-	
-		walls [0] = createWall (0, 0);
-		walls [1] = createWall (0, 1);
-		walls [2] = createWall (0, 2);
-		walls [3] = createWall (0, 3);
-		walls [4] = createWall (1, 0);
-		walls [5] = createWall (2, 0);
-		walls [6] = createWall (3, 0);
-		walls [7] = createWall (1, 0);
-		walls [8] = createWall (3, 1);
-		walls [9] = createWall (3, 2);
-		walls [10] = createWall (3, 3);
-		walls [10] = createWall (1, 3);
-		walls [10] = createWall (2, 3);
-		walls [10] = createWall (3, 3);
-		wall = (GameObject)Instantiate (wall);
+		loadLevel("test")
+		
+		
+		
+		
+	}
 
+	void loadLevel(string path){
+		//Load bitmap
+		Texture2D testBMP = Resources.Load(path) as Texture2D;
+		var width = testBMP.width;
+		var height = testBMP.height;
+		walls = new GameObject[width,height];
 
-
+		for (int y = 0; y < height; y++)
+		{
+			for(int x = 0; x < width ; x++)
+			{
+				Color colour = testBMP.GetPixel(x, y);
+				walls[x,y] = createWall(x,y,colour);
+				
+			}
+		}
 
 	}
-	GameObject createWall(int x, int z){
+
+	GameObject createWall(int x, int z, Color c){
+		if (c == Color.white) {return null;}
+		else{
 		return (GameObject)Instantiate (wall, new Vector3 (x * 3, -1.5f, z * 3), new Quaternion ());
+		}
 	}
 	// Update is called once per frame
 	void Update () {
