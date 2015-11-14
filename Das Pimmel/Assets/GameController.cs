@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 	public GameObject ground;
 	public GameObject ceiling;
 	public GameObject wall;
+	public GameObject player;
 
 	public GameObject[,] walls;
 
@@ -15,7 +16,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		Instantiate (ground);
 		Instantiate (ceiling);
-		loadLevel("test")
+		loadLevel ("test");
 		
 		
 		
@@ -42,9 +43,14 @@ public class GameController : MonoBehaviour {
 	}
 
 	GameObject createWall(int x, int z, Color c){
-		if (c == Color.white) {return null;}
-		else{
-		return (GameObject)Instantiate (wall, new Vector3 (x * 3, -1.5f, z * 3), new Quaternion ());
+
+		if (c == Color.white) {
+			return null;
+		}else if(c == Color.blue){
+			player.transform.position.Set(x * scale, 0, z * scale);
+			return null;
+		}else{
+			return (GameObject)Instantiate (wall, new Vector3 (x * scale, -1.5f, z * scale), new Quaternion ());
 		}
 	}
 	// Update is called once per frame
