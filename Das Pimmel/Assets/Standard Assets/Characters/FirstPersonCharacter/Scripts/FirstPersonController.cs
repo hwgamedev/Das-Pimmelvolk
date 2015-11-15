@@ -42,7 +42,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 		public GameObject gun;
-        public GameObject pellet;
 
         // Use this for initialization
         private void Start()
@@ -235,10 +234,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				gun.GetComponent<Animation> ().Play ("Shooting animation");
 				RaycastHit hit;
 				Ray ray = new Ray (transform.position, m_Camera.transform.forward);
-				if (Physics.Raycast (ray, out hit, 10)) {
+				if (Physics.Raycast (ray, out hit, 100)) {
 					Debug.DrawLine (transform.position, hit.point, Color.white, 5f);
 					if (hit.collider.tag == "Enemy") {
-						Debug.Log ("Enemy hit!");
+						GameObject e = hit.transform.gameObject;
+						e.GetComponent<ParticleSystem>().Emit(100);
+
+
 
 					}
 

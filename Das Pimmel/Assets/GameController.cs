@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
 	public GameObject ceiling;
 	public GameObject wall;
 	public GameObject player;
+	public GameObject enemy;
 	public EnemyController enemies;
 	public GameObject[,] walls;
 
@@ -27,7 +28,9 @@ public class GameController : MonoBehaviour {
 		//Load bitmap
 		Texture2D testBMP = Resources.Load(path) as Texture2D;
 		var width = testBMP.width;
+		Debug.Log (width);
 		var height = testBMP.height;
+		Debug.Log (height);
 		walls = new GameObject[width,height];
 
 		for (int y = 0; y < height; y++)
@@ -55,14 +58,14 @@ public class GameController : MonoBehaviour {
 		}
 		else if (c == Color.red)
 		{
-			var X = x * scale;
-			var Z = z * scale;
-			enemies.addEnemy(X, Z);
+			enemy.tag = "Enemy";
+			Instantiate(enemy, new Vector3(x * scale, 0f, z * scale), new Quaternion());
 			return null;
 		}
-		else{
+		else if (c == Color.black){
 			return (GameObject)Instantiate(wall, new Vector3(x * scale, -1.5f, z * scale), new Quaternion());
 		}
+		return null;
 		
 		
 	}

@@ -3,19 +3,21 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-    private int health;
+	public int health = 100;
     private string name;
+    private Object target;
+    private Transform enemyTransform;
+    private int rotationSpeed = 3;
+    private int moveSpeed = 3;
 
-	// Use this for initialization
-	void Start ()
-    {
-        setupMob(name);
+	private void Start(){
 	}
 
-    public void setupMob(string name)
+
+    public void createModel(int x, int z)
     {
-        this.health = 100;
-        setName(name);
+        GameObject prefab = (GameObject)Resources.Load("Skeleton");
+        Instantiate(prefab, new Vector3(x, -1.5f, z), new Quaternion());
     }
 
     public void updateHealth(int hitpoints)
@@ -35,7 +37,14 @@ public class Enemy : MonoBehaviour {
 
     
 	// Update is called once per frame
-	void Update () {
-	
+	private void Update ()
+    {
+        if (this.health > 0) {
+			//enemyTransform.rotation = Quaternion.Slerp(enemyTransform.rotation, Quaternion.LookRotation(target.position - enemyTransform.position), rotationSpeed * Time.deltaTime);
+			transform.position += transform.forward * moveSpeed * Time.deltaTime;
+
+		} else {
+			Destroy(this);
+		}
 	}
 }
