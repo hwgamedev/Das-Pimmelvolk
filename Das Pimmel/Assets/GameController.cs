@@ -40,14 +40,15 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
-	}
+	} 
 
 	GameObject createWall(int x, int z, Color c){
 
 		if (c == Color.white) {
 			return null;
 		}else if(c == Color.blue){
-			player.transform.position.Set(x * scale, 0, z * scale);
+			player.transform.position = new Vector3(x * scale, 0.8f, z * scale);
+			Debug.Log("moving player");
 			return null;
 		}else{
 			return (GameObject)Instantiate (wall, new Vector3 (x * scale, -1.5f, z * scale), new Quaternion ());
