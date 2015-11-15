@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        //SetUp Mob
         setupMob(name);
 	}
 
