@@ -5,7 +5,7 @@ public class Player : MonoBehaviour {
 
     private int ammo;
     private int health;
-    private var inventory = new List<object>();
+    private ArrayList inventory = new ArrayList();
     private int maxCapacity;
     private int maxAmmo;
     private int maxHealth;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
     //UPDATE AMMO AND HEALTH
     public void updateAmmo(int ammoUpdate)
     {
-        if(!(getAmmo+ammoUpdate > maxAmmo))
+        if(!(getAmmo()+ammoUpdate > maxAmmo))
         {
             this.ammo = this.ammo - ammoUpdate;
             if(this.ammo < 0)
@@ -59,9 +59,9 @@ public class Player : MonoBehaviour {
 
     public void updateHealth(int healthUpdate)
     {
-        if(!(getHealth+healthUpdate > maxHealth))
+        if(!(getHealth()+healthUpdate > maxHealth))
         {
-            this.health = this.health - hitpoints;
+            this.health = this.health + healthUpdate;
             if (this.health < 0)
             {
                 //DEAD
@@ -81,7 +81,7 @@ public class Player : MonoBehaviour {
     public void addItemInv(object item)
     {
         //If adding would not go over max, add item
-        if (!(inventory.length + 1 > getCap()))
+        if (!(inventory.Count + 1 > getCap()))
         {
             inventory.Add(item);
         }
