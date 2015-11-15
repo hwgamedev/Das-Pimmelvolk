@@ -42,6 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 		public GameObject gun;
+        public GameObject pellet;
 
         // Use this for initialization
         private void Start()
@@ -232,9 +233,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 			if(Input.GetMouseButtonDown(0)){
 				gun.GetComponent<Animation>().Play("Shooting animation");
+                GameObject p = (GameObject)Instantiate(pellet, transform.position, transform.rotation);
+                p.GetComponent<Rigidbody>().AddForce(transform.forward*200);
+ 
 
 
-			}
+            }
         }
 
 

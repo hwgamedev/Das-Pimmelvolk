@@ -3,14 +3,11 @@ using System.Collections;
 
 public class Pellet : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-
-	}
+    public float speed;
+    public Vector3 direction;
 	
 	// Update is called once per frame
 	void Update () {
-
-	
-	}
+        //transform.position += direction * speed * Time.deltaTime;
+    }
 }
