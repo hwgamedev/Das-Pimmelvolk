@@ -241,8 +241,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 				}
 
-
             }
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				Application.Quit();
+				Debug.Log("quiting");
+			}
+
         }
 
 
