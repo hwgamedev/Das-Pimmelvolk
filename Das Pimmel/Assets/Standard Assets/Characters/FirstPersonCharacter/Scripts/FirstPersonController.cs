@@ -233,9 +233,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 			if(Input.GetMouseButtonDown(0)){
 				gun.GetComponent<Animation>().Play("Shooting animation");
-                GameObject p = (GameObject)Instantiate(pellet, transform.position, transform.rotation);
-                p.GetComponent<Rigidbody>().AddForce(transform.forward*200);
- 
+//                GameObject p = (GameObject)Instantiate(pellet, transform.position, transform.rotation);
+//                p.GetComponent<Rigidbody>().AddForce(transform.forward*200);
+				RaycastHit hit;
+				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+				if (Physics.Raycast(ray,out hit, 10)) {
+					print(hit.collider.name);
+					Debug.DrawRay(m_Camera.transform.position,hit.point);
+
+				}
 
 
             }
