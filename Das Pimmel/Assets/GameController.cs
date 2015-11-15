@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
 	public GameObject ceiling;
 	public GameObject wall;
 	public GameObject player;
-
+	public EnemyController enemies;
 	public GameObject[,] walls;
 
 	public int scale = 3;
@@ -43,16 +43,28 @@ public class GameController : MonoBehaviour {
 	} 
 
 	GameObject createWall(int x, int z, Color c){
-
-		if (c == Color.white) {
+		
+		if (c == Color.white)
+		{
 			return null;
-		}else if(c == Color.blue){
-			player.transform.position = new Vector3(x * scale, 0.8f, z * scale);
-			Debug.Log("moving player");
-			return null;
-		}else{
-			return (GameObject)Instantiate (wall, new Vector3 (x * scale, -1.5f, z * scale), new Quaternion ());
 		}
+		else if (c == Color.blue)
+		{
+			player.transform.position = new Vector3(x * scale, 0.8f, z * scale);
+			return null;
+		}
+		else if (c == Color.red)
+		{
+			var X = x * scale;
+			var Z = z * scale;
+			enemies.addEnemy(X, Z);
+			return null;
+		}
+		else{
+			return (GameObject)Instantiate(wall, new Vector3(x * scale, -1.5f, z * scale), new Quaternion());
+		}
+		
+		
 	}
 	// Update is called once per frame
 	void Update () {

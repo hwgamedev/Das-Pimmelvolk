@@ -231,20 +231,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 StopAllCoroutines();
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
             }
-			if(Input.GetMouseButtonDown(0)){
-				gun.GetComponent<Animation>().Play("Shooting animation");
+			if (Input.GetMouseButtonDown (0)) {
+				gun.GetComponent<Animation> ().Play ("Shooting animation");
 				RaycastHit hit;
-				Ray ray =  new Ray(transform.position,m_Camera.transform.forward);
-				if (Physics.Raycast(ray,out hit, 10)) {
-					print(hit.collider.name);
-					Debug.DrawLine(transform.position,hit.point,Color.white,5f);
+				Ray ray = new Ray (transform.position, m_Camera.transform.forward);
+				if (Physics.Raycast (ray, out hit, 10)) {
+					Debug.DrawLine (transform.position, hit.point, Color.white, 5f);
+					if (hit.collider.tag == "Enemy") {
+						Debug.Log ("Enemy hit!");
+
+					}
 
 				}
-
-            }
+			}
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				Application.Quit();
-				Debug.Log("quiting");
 			}
 
         }
